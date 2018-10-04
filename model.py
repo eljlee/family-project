@@ -1,7 +1,10 @@
+###### model file - create tables ##### 
+
 from flask_sqlalchemy import flask_sqlalchemy
 
 db = SQLAlchemy()
 
+##### Model definitions #####
 
 class User(db.Model):
 	"""Users."""
