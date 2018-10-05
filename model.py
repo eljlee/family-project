@@ -70,8 +70,54 @@ class Picture(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "< Picture pic_id={} filename={} uploader_id={} event_id={} >".format(self.pic_id, 
+        return "< Picture pic_id={} filename={} uploader_id={} event_id={} >".format(
+                                                                                     self.pic_id, 
                                                                                      self.filename, 
                                                                                      self.uploader_id, 
                                                                                      self.event_id
                                                                                      )
+
+
+
+
+class Family_Relation(db.Model):
+    """Who's related to who."""
+
+    __tablename__ = 'relations'
+
+    relation_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    relation_1_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    relation_2_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return "< relation_1_id={} relation_2_id={} >".format(
+                                                           self.relation_1_id, 
+                                                           self.relation_2_id
+                                                           )
+
+
+
+#########################################################################
+
+def connect_to_db(app):
+    """Connect the database to our Flask app."""
+
+    # Configure to use our PstgreSQL database
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///eventfull'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
+
+
+if __name__ == "__main__":
+
+    from server import app
+    connect_to_db(app)
+    db.create_all()
+    print "Connected to DB."
+
+
+
