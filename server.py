@@ -10,11 +10,11 @@ from flask import Flask, render_template, redirect, request, flash, session, jso
 from flask_debugtoolbar import DebugToolbarExtension
 from werkzeug import secure_filename
 import datetime
-from model import User, Event, Picture, connect_to_db, db
+from model import User, Event, Picture, Family_Relation, connect_to_db, db
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.secret_key = 'EVENTFULL'
+app.secret_key = 'FAMILY'
 
 
 ################
